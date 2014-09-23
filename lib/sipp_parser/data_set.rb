@@ -1,3 +1,6 @@
+require './lib/sipp_parser/utility/extraction'
+require './lib/sipp_parser/utility/calculation'
+
 module SippParser
   class DataSet
     include SippParser::Utility::Extraction

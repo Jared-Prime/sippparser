@@ -67,7 +67,7 @@ module SippParser
         dur = original_file.match(AVG_DURATION_LINE).to_s.strip
         dur = dur.split ':'
 
-        @average_duration = (dur[left] + '.' dur[right]).to_f        
+        @average_duration = (dur[left] + '.' + dur[right]).to_f
       end
 
       def target_ip_address
