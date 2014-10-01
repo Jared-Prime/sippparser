@@ -20,6 +20,8 @@ module SippParser
       def partition_table(frame_pos=5, count_pos=8)
         return @partition_table if @partition_table
         
+        lines = original_file.split /\n/
+
         lines = lines.select do |line|
           line.match PARTION_LINE
         end

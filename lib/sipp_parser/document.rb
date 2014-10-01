@@ -79,6 +79,7 @@ module SippParser
       end
     end
 
+    # :nocov:
     def write_summary_data(filename)
       CSV.open(filename, 'w') do |csv|
         csv << SippParser::Utility::Calculation::SUMMARY_HEADERS
@@ -96,5 +97,6 @@ module SippParser
         csv
       end
     end
+    # :nocov:
   end
 end

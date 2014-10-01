@@ -7,7 +7,6 @@ module SippParser
     include SippParser::Utility::Calculation
 
     attr_reader :original_file, :run_id
-    attr_reader :total_calls, :success_rate, :error_rate
 
     def initialize(original_file, run_id='')
       @original_file, @run_id = original_file, run_id
@@ -19,12 +18,6 @@ module SippParser
       return @summary_data if @summary_data
 
       @summary_data = [timestamp, run_id, node_ip_address] + extraction_summary_data + calculation_summary_data
-    end
-
-    private
-
-    def lines
-      @lines ||= original_file.split /\r\n/
     end
   end
 end

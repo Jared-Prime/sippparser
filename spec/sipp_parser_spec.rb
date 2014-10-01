@@ -1,5 +1,4 @@
-require './lib/sipp_parser'
-require './lib/sipp_parser/data_set'
+require 'spec_helper'
 
 describe SippParser do
   subject { described_class }

@@ -1,5 +1,4 @@
-require './lib/sipp_parser/document'
-require './lib/sipp_parser/data_set'
+require 'spec_helper'
 
 describe SippParser::Document do
   subject { described_class.new data_set1, data_set2 }
