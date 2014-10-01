@@ -4,8 +4,8 @@ module SippParser
   class Document
     SPACER_COLS = ['','']
 
-    def initialize(data_sets)
-      @data_sets = data_sets
+    def initialize(*data_sets)
+      @data_sets = data_sets.to_a
     end
 
     def partition_summary_heading
@@ -49,12 +49,21 @@ module SippParser
 
       @partition_data = []
 
-      for set in @data_sets; i=0
-        for table in set.partition_table; j=0
-          @partition_data << table + SPACER_COLS if i == 0
+      row, col_set = 0, 0
 
-          @partition_data = @partition_data[j] + table + SPACER_COLS
+      for set in @data_sets
+        for table in set.partition_table
+          if col_set == 0
+            @partition_data << table + SPACER_COLS 
+          else
+            @partition_data[row] = @partition_data[row] + table + SPACER_COLS
+          end
+
+          row += 1
         end
+
+        row = 0
+        col_set += 1
       end
 
       return @partition_data

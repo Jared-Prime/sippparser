@@ -7,6 +7,12 @@ module SippParser
       MIN_DURATION = '9000'
       MAX_DURATION = '10000'
 
+      def calculation_summary_data
+        return @calculation_summary_data if @calculation_summary_data
+        
+        @calculation_summary_data = [ total_calls, successes, failures, success_rate, failure_rate ]
+      end
+
       def total_calls
         return @total_calls if @total_calls
 
@@ -37,8 +43,8 @@ module SippParser
         @success_rate ||= successes / total_calls 
       end
 
-      def error_rate
-        @error_rate ||= failures / total_calls
+      def failure_rate
+        @failure_rate ||= failures / total_calls
       end
     end
   end

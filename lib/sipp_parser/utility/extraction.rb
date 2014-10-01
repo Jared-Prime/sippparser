@@ -9,8 +9,13 @@ module SippParser
       AVG_RATE_LINE     = /Call Rate.*/
       AVG_DURATION_LINE = /Call Length.*/
       IP_ADDRESS = /\d{3}\.\d{3}\.\d{2}\.\d{1}/
-      SUMMARY_HEADING = ['Node IP', 'Test Run ID', 'Timestamp', 'Peak Concurrency',
-        'Target Rate', 'Average Rate', 'Average Duration']
+      SUMMARY_HEADING = ['Peak Concurrency', 'Target Rate', 'Average Rate', 'Average Duration']
+
+      def extraction_summary_data
+        return @extraction_summary_data if @extraction_summary_data
+
+        @extraction_summary_data = [ peak_concurrency, target_rate, average_duration, average_duration ]
+      end
 
       def partition_table(frame_pos=5, count_pos=8)
         return @partition_table if @partition_table
@@ -70,10 +75,16 @@ module SippParser
         @average_duration = (dur[left] + '.' + dur[right]).to_f
       end
 
-      def target_ip_address
-        return @target_ip_address if @target_ip_address
+      def node_ip_address
+        return @node_ip_address if @node_ip_address
 
-        @target_ip_address = original_file.match(IP_ADDRESS).to_s
+        @node_ip_address = original_file.match(IP_ADDRESS).to_s
+      end
+
+      def run_id
+        return @run_id if @run_id
+
+        @run_id = original_file.match(RUN_ID).to_s
       end
     end
   end
